@@ -1,0 +1,8 @@
+# Ne pas ignorer node_modules pour cette fois
+# public/
+# server/
+# Dockerfile
+# docker-compose.yml
+# package.json
+# package-lock.json
+

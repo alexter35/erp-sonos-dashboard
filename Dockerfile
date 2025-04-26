@@ -1,8 +1,14 @@
-FROM node:18
+FROM debian:bullseye-slim
+
+RUN apt-get update && apt-get install -y curl \
+  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+  && apt-get install -y nodejs \
+  && apt-get clean
+
 WORKDIR /app
-COPY server server
-COPY public public
-COPY package.json .
-RUN npm install
+
+COPY . .
+
 EXPOSE 3000
+
 CMD ["node", "server/index.js"]
