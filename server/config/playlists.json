@@ -1,0 +1,4 @@
+[
+  { "name": "Radio France", "uri": "x-sonosapi-stream:s12345?sid=254&flags=32" },
+  { "name": "Lounge Chill", "uri": "spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n" }
+]
