@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonos Monitoring</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f2f2f2;
+      padding: 2rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .logo {
+      height: 40px;
+    }
+    .zone {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .now-playing {
+      margin-top: 1rem;
+      background: #fafafa;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .now-playing img {
+      max-width: 80px;
+      vertical-align: middle;
+      margin-right: 10px;
+      border-radius: 6px;
+    }
+    .progress-bar {
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .progress {
+      height: 100%;
+      background: #4caf50;
+      width: 0%;
+    }
+    .volume-controls {
+      margin-top: 1rem;
+    }
+    .nav-btn {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>📊 Sonos Monitoring Panel</h2>
+    <div>
+      <a href="control.html" class="nav-btn">🎛️ Control</a>
+      <img src="https://code.hauff.fr/logo/alexandrehauff01.png" alt="Logo" class="logo">
+    </div>
+  </header>
+
+  <div class="zone" id="zone-principale">
+    <h3>📍 Salle Principale</h3>
+    <div class="now-playing">
+      <img src="" id="art-principale" alt="Album Art">
+      <strong id="title-principale">Titre</strong> – <span id="artist-principale">Artiste</span>
+      <div class="progress-bar">
+        <div class="progress" id="progress-principale"></div>
+      </div>
+    </div>
+    <div class="volume-controls">
+      Volume: <input type="range" min="0" max="100" value="50" id="volume-principale">
+    </div>
+  </div>
+
+  <div class="zone" id="zone-petite">
+    <h3>📍 Petite Salle</h3>
+    <div class="now-playing">
+      <img src="" id="art-petite" alt="Album Art">
+      <strong id="title-petite">Titre</strong> – <span id="artist-petite">Artiste</span>
+      <div class="progress-bar">
+        <div class="progress" id="progress-petite"></div>
+      </div>
+    </div>
+    <div class="volume-controls">
+      Volume: <input type="range" min="0" max="100" value="50" id="volume-petite">
+    </div>
+  </div>
+
+  <div class="zone" id="zone-terrasse">
+    <h3>📍 Terrasse</h3>
+    <div class="now-playing">
+      <img src="" id="art-terrasse" alt="Album Art">
+      <strong id="title-terrasse">Titre</strong> – <span id="artist-terrasse">Artiste</span>
+      <div class="progress-bar">
+        <div class="progress" id="progress-terrasse"></div>
+      </div>
+    </div>
+    <div class="volume-controls">
+      Volume: <input type="range" min="0" max="100" value="50" id="volume-terrasse">
+    </div>
+  </div>
+
+  <script>
+    function updateNowPlaying(zone, data) {
+      document.getElementById(`title-${zone}`).textContent = data.title;
+      document.getElementById(`artist-${zone}`).textContent = data.artist;
+      document.getElementById(`art-${zone}`).src = data.albumArt;
+      const progress = (data.position / data.duration) * 100;
+      document.getElementById(`progress-${zone}`).style.width = progress + "%";
+    }
+
+    function startPolling() {
+      setInterval(() => {
+        fetch("/api/state")
+          .then(res => res.json())
+          .then(data => {
+            updateNowPlaying("principale", data.principale);
+            updateNowPlaying("petite", data.petite);
+            updateNowPlaying("terrasse", data.terrasse);
+          });
+      }, 5000);
+    }
+
+    startPolling();
+  </script>
+
+</body>
+</html>

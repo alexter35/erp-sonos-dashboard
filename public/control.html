@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonos Control Panel</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f2f2f2;
+      padding: 2rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .logo {
+      height: 40px;
+    }
+    .zone {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .controls button, .controls select {
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .volume-slider {
+      margin-top: 0.5rem;
+    }
+    .nav-btn {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>🎛️ Sonos Control Panel</h2>
+    <div>
+      <a href="monitoring.html" class="nav-btn">📊 Monitoring</a>
+      <img src="https://code.hauff.fr/logo/alexandrehauff01.png" alt="Logo" class="logo">
+    </div>
+  </header>
+
+  <div class="zone">
+    <h3>📍 Salle Principale</h3>
+    <div class="controls">
+      <button>▶️ Play</button>
+      <button>⏸️ Pause</button>
+      <select>
+        <option>-- Source --</option>
+        <option>Radio France</option>
+        <option>Spotify Playlist 1</option>
+        <option>Entrée analogique Terrasse</option>
+      </select>
+      <br>
+      Volume: <input type="range" class="volume-slider" min="0" max="100" value="50">
+    </div>
+  </div>
+
+  <div class="zone">
+    <h3>📍 Petite Salle</h3>
+    <div class="controls">
+      <button>▶️ Play</button>
+      <button>⏸️ Pause</button>
+      <select>
+        <option>-- Source --</option>
+        <option>Radio France</option>
+        <option>Spotify Playlist 2</option>
+      </select>
+      <br>
+      Volume: <input type="range" class="volume-slider" min="0" max="100" value="50">
+    </div>
+  </div>
+
+  <div class="zone">
+    <h3>📍 Terrasse</h3>
+    <div class="controls">
+      <button>▶️ Play</button>
+      <button>⏸️ Pause</button>
+      <select>
+        <option>-- Source --</option>
+        <option>Radio France</option>
+        <option>Spotify Playlist 3</option>
+        <option>Entrée analogique</option>
+      </select>
+      <br>
+      Volume: <input type="range" class="volume-slider" min="0" max="100" value="50">
+    </div>
+  </div>
+
+</body>
+</html>
